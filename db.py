@@ -7,11 +7,11 @@ DB_CONFIG = {
     'password': 'masterkey'
 }
 
-# текст sql команд, данные для подстановки, флаг с запросом данных из бд или просто сохранить
+# команды, данные для подстановки, флаг с запросом данных из бд, сохранение
 def db_query(query, params=(), fetch=False):
-    # попробуй сделать что ниже, если не получится то переход в except и вывод ошибки
+    # если не получится сделать команды ниже то переход к except и вывод ошибки
     try:
-        # дверь к бд, with закрывает когда выхожу
+        # закрывает базу данных
         with connect(
             database=DB_CONFIG['database'],
             user=DB_CONFIG['user'],
@@ -22,7 +22,7 @@ def db_query(query, params=(), fetch=False):
                 return None
             cur = con.cursor()
             cur.execute(query, params)  # команда выполняю действие, текст и данные которые я подставлю
-            # если просил данные то fetchall их забирает, сохраняет и возвращает
+            # fetchall при запросе забирает, сохраняет и возвращает данные
             if fetch:
                 result = cur.fetchall()
                 con.commit() # кнопка сохранить
