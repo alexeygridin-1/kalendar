@@ -1,7 +1,7 @@
 import streamlit as st
 from auth import show_auth_screen
-from calendars import show_sidebar
-from events import show_events_ui
+from sidebar import show_sidebar
+from events_ui import show_events_ui
 
 # открываю новую вкладку и называю календарь
 st.set_page_config(page_title="Мой Календарь", layout="wide")
@@ -28,7 +28,7 @@ if 'selected_template_duration' not in st.session_state:
 
 if 'selected_template_all_day' not in st.session_state:
     st.session_state.selected_template_all_day = False
-# программа смотрит в блокнот памяти. если там пусто то показывает экран входа иначе календари и сообытия
+# если в памяти пусто то откроется экран входа иначе календари и сообытия
 if st.session_state.user_id is None:
     show_auth_screen()
 else:
