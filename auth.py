@@ -1,7 +1,7 @@
 import streamlit as st
 from db import db_query
 
-# отрисовка экрана и CSS чтобы сделать вход красивым
+# отрисовка экрана
 def show_auth_screen():
     st.markdown("""
         <style>
@@ -31,11 +31,11 @@ def show_auth_screen():
         </style>
     """, unsafe_allow_html=True)
 
-    # разделяю экран на 3 части чтобы поместить в центр
+    # делю экран на 3 части и помещаю входное окно в центр
     col1, col2, col3 = st.columns([1, 1.5, 1])
 
     with col2:
-        # рамка вокруг формы входа
+        # рамка
         with st.container(border=True):
             st.markdown('<div class="login-title">Яндекс Календарь</div>', unsafe_allow_html=True)
 
@@ -44,7 +44,6 @@ def show_auth_screen():
             with tab1:
                 st.write("Войдите, чтобы продолжить")
 
-                # st.form чтобы страница не перезагружалась при вводе - форма поля для ввода
                 with st.form(key="login_form"):
                     login_email = st.text_input("Email", placeholder="Введите ваш email")
                     login_pass = st.text_input("Пароль", type="password", placeholder="Введите пароль")
@@ -58,7 +57,7 @@ def show_auth_screen():
                             with st.spinner("Проверка данных..."):
                                 user = db_query("SELECT ID, NAME, SURNAME FROM USERS WHERE EMAIL = ? AND PASSWORD = ?",
                                                 (login_email, login_pass), fetch=True)
-                            # если нашел записываю его id в память
+                            # если нашел записываю id в память
                             if user:
                                 st.session_state.user_id = user[0][0]
                                 st.session_state.user_name = f"{user[0][2]} {user[0][1]}"
