@@ -1,6 +1,6 @@
 import streamlit as st
 from db import db_query
-from calendar_modals import create_calendar_modal, create_template_modal, calendar_settings_modal
+from calendar_window import create_calendar_modal, create_template_modal, calendar_settings_modal
 
 # левое меню
 def show_sidebar():
