@@ -2,7 +2,7 @@ import streamlit as st
 from db import db_query
 from datetime import datetime, timedelta
 from calendar_net import show_calendar_grid
-from event_modals import create_event_modal, edit_event_modal
+from event_window import create_event_modal, edit_event_modal
 from participants import show_event_participants, invite_users_modal
 
 def show_events_ui():
